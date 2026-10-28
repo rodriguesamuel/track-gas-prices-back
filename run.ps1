@@ -57,4 +57,6 @@ if ($rawUrl -match "^postgresql://([^:@]+):([^@]+)@([^/?]+)/([^?]*)(.*)$") {
     exit 1
 }
 
-mvn spring-boot:run
+# Use the project-local settings.xml (Maven Central, not the corporate JFrog mirror)
+$settings = Join-Path $PSScriptRoot "settings.xml"
+mvn -s $settings spring-boot:run

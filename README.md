@@ -54,15 +54,20 @@ O script configura o JDK 21, carrega o `.env` e inicia `mvn spring-boot:run`.
 ### Multiplataforma (Maven)
 
 ```bash
-mvn spring-boot:run
+mvn -s settings.xml spring-boot:run
 ```
+
+> **Dependências via Maven Central.** O projeto inclui um `settings.xml` próprio que resolve as
+> dependências direto do Maven Central, ignorando qualquer mirror corporativo (ex.: JFrog Artifactory)
+> configurado no `~/.m2/settings.xml` global. Use sempre `-s settings.xml` nos comandos Maven
+> (`mvn -s settings.xml clean package`, etc.). O `run.ps1` já faz isso automaticamente.
 
 A aplicação sobe em `http://localhost:8080`. As migrations do Flyway são aplicadas automaticamente na inicialização.
 
 ### Build
 
 ```bash
-mvn clean package
+mvn -s settings.xml clean package
 java -jar target/trackgas-backend-0.0.1-SNAPSHOT.jar
 ```
 
